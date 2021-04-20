@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>usv_control</name>
+  <version>0.0.0</version>
+  <description>The usv_control package</description>
+  <author email="briansbingham@gmail.com">Brian Bingham</author> -->
+  <maintainer email="briansbingham@gmail.com">Brian Bingham</maintainer>
+  <license>Apache 2</license>
+  <depend>rospy</depend>
+  <depend>message_runtime</depend>
+  <depend>std_msgs</depend>
+  <depend>nav_msgs</depend>
+  <depend>sensor_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <buildtool_depend>catkin</buildtool_depend>
+  <export>
+  </export>
+</package>

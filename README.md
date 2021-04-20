@@ -1,2 +1,2 @@
 # usv_control
-ROS Low-Level PID Feedback Control for Unmanned Surface Vessel
+ROS, Python3 Low-Level PID Feedback Control for Unmanned Surface Vessel.  
