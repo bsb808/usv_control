@@ -390,7 +390,7 @@ class Pid(object):
           * Integrator estimate
         """
         if dt < 1.0e-6:
-            return np.array([0,0,0,0])
+            return np.zeros(8)
 
         # Input filter
         # Filtered setpoint

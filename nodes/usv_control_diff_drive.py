@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-####!/usr/bin/env python
+#!/usr/bin/env python
 '''
 Using instances of the pypid Pid class to control yaw and velocity
 '''
@@ -70,9 +69,12 @@ class Node():
         dt = now-self.lasttime
         self.lasttime = now
         #print("dt: %.6f"%dt)
+        if dt < 1.0e-6:
+            rospy.logwarn("USV Control dt too small <%f>"%dt)
+            return
+        
         yout = self.ypid.execute(dt,dyaw)
         torque = yout[0]
-        #torque = 0.0
 
         # Velocity control
         dx = msg.twist.twist.linear.x
@@ -100,7 +102,6 @@ class Node():
         self.left_publisher.publish(self.left_cmd)
         self.right_publisher.publish(self.right_cmd)
 
-        
         if not (self.ypubdebug is None):
             self.ydebugmsg.PID = yout[0]
             self.ydebugmsg.P = yout[1]
@@ -121,7 +122,6 @@ class Node():
             self.vdebugmsg.Derivative= vout[6]
             self.vdebugmsg.Integral = vout[7]
             self.vpubdebug.publish(self.vdebugmsg)
-
 
     def dynamic_callback(self,config,level):
         #rospy.loginfo("""Reconfigure Request: {int_param}, {double_param},\ 
@@ -178,8 +178,10 @@ if __name__ == '__main__':
     node.right_cmd = Float32()
     
     # Setup publisher
-    node.left_publisher = rospy.Publisher('/cora/thrusters/left_thrust_cmd',Float32,queue_size=1)
-    node.right_publisher = rospy.Publisher('/cora/thrusters/right_thrust_cmd',Float32,queue_size=1)
+    node.left_publisher = rospy.Publisher('left_thrust_cmd',
+                                          Float32,queue_size=1)
+    node.right_publisher = rospy.Publisher('right_thrust_cmd',
+                                           Float32,queue_size=1)
     rospy.loginfo("Publishing to %s and %s"%
                   (node.left_publisher.name, node.right_publisher.name))
     node.ypubdebug = rospy.Publisher("yaw_pid_debug",PidDiagnose,queue_size=10)
@@ -188,7 +190,7 @@ if __name__ == '__main__':
     node.vdebugmsg = PidDiagnose()
 
     # Setup subscribers
-    s1 = rospy.Subscriber('odometry/nav',Odometry,node.odom_callback)
+    s1 = rospy.Subscriber('nav_odom',Odometry,node.odom_callback)
     s2 = rospy.Subscriber("cmd_vel",Twist,node.twist_callback)
     rospy.loginfo("Subscribing to %s"%
                   (s1.name))

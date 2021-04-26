@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<launch>
+  <node name = "cora_qrt_tuner" pkg = "rqt_gui" type = "rqt_gui" output = "screen" args = "--perspective-file $(find usv_control)/cfg/cora_control_tuner.perspective"/>
+</launch>
