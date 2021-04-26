@@ -2,11 +2,23 @@
 <launch>
   <node ns="cora" pkg="usv_control" type="usv_control_diff_drive.py"
   name="usv_control_diff_drive" output="screen">
+    <!-- Set initial control gains -->
+    <!-- Surge -->
+    <param name="velKp" value="0.1"/>
+    <param name="velKi" value="0.0"/>
+    <param name="velKd" value="0.0"/>
+    <!-- Yaw Rate -->
+    <param name="yawKp" value="0.1"/>
+    <param name="yawKi" value="0.0"/>
+    <param name="yawKd" value="0.0"/>
+
+    <!-- Use remap to connect generic controller to specific use-case -->
     <remap from="nav_odom" to="robot_localization/odometry/filtered"/>
     <remap from="left_thrust_cmd" to="thrusters/left_thrust_cmd"/>
     <remap from="right_thrust_cmd" to="thrusters/right_thrust_cmd"/>
     <remap from="vel_pid_debug" to="control/vel_pid_debug"/>
-    <remap from="yaw_pid_debug" to="control/yaw_pid_debug"/>	
+    <remap from="yaw_pid_debug" to="control/yaw_pid_debug"/>
+    
   </node>
 
 </launch>

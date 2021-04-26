@@ -154,11 +154,11 @@ if __name__ == '__main__':
     rospy.init_node('cusv_twist_control', anonymous=True)
     
     # ROS Parameters
-    yawKp = rospy.get_param('~yawKp',1.0)
+    yawKp = rospy.get_param('~yawKp',0.0)
     yawKd = rospy.get_param('~yawKd',0.0)
     yawKi = rospy.get_param('~yawKi',0.0)
 
-    velKp = rospy.get_param('~velKp',1.0)
+    velKp = rospy.get_param('~velKp',0.0)
     velKd = rospy.get_param('~velKd',0.0)
     velKi = rospy.get_param('~velKi',0.0)
     
