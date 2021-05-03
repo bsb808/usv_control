@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 '''
 Using instances of the pypid Pid class to control yaw and velocity
 '''

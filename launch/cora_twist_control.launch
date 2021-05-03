@@ -13,7 +13,7 @@
     <param name="yawKd" value="0.0"/>
 
     <!-- Use remap to connect generic controller to specific use-case -->
-    <remap from="nav_odom" to="robot_localization/odometry/filtered"/>
+    <remap from="nav_odom" to="sensors/p3d_nav"/>
     <remap from="left_thrust_cmd" to="thrusters/left_thrust_cmd"/>
     <remap from="right_thrust_cmd" to="thrusters/right_thrust_cmd"/>
     <remap from="vel_pid_debug" to="control/vel_pid_debug"/>
