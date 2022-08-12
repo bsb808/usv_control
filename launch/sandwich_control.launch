@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="usv_control" type="usv_control_sandwich.py"
+  name="usv_control_sandwich" output="screen">
+    <!-- Set initial control gains -->
+    <!-- Yaw Rate -->
+    <param name="yawKp" value="0.1"/>
+    <param name="yawKi" value="0.0"/>
+    <param name="yawKd" value="0.0"/>
+
+    <!-- Use remap to connect generic controller to specific use-case -->
+    <remap from="cmd_vel" to="robot0/cmd_vel"/>
+    <remap from="imu/data" to="robot0/sandwich_0/sensors/imu/imu/data"/>
+    <remap from="left_thrust_cmd"
+	   to="sandwich_0/thrusters/left_thrust_cmd"/>
+    <remap from="right_thrust_cmd"
+	   to="sandwich_0/thrusters/right_thrust_cmd"/>
+    <remap from="yaw_pid_debug" to="control/yaw_pid_debug"/>
+    
+  </node>
+
+</launch>
